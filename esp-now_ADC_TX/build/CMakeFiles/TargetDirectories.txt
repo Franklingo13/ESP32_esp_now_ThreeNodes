@@ -607,3 +607,10 @@ D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp
 D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/main/CMakeFiles/install.dir
 D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/main/CMakeFiles/install/local.dir
 D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/main/CMakeFiles/install/strip.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/__idf_SSD1306.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/edit_cache.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/rebuild_cache.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/list_install_components.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/install.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/install/local.dir
+D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/CMakeFiles/install/strip.dir

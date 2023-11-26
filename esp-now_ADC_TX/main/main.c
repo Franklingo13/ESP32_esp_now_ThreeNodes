@@ -110,7 +110,8 @@ void app_main()
         }
         else
         {
-            int adc_value = (adc_data[0] << 8) | adc_data[1]; // Combina los dos bytes en un valor entero, ajusta esto según tu ADC
+            //int adc_value = (adc_data[0] << 8) | adc_data[1]; // Combina los dos bytes en un valor entero
+            int adc_value = adc_data[1]; 
             ESP_LOGI(TAG, "Valor ADC: %d", adc_value);
             // Enviar datos por ESP-NOW
             char mesage[20];

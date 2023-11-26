@@ -407,3 +407,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/main/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build/esp-idf/SSD1306/cmake_install.cmake")
+endif()
+
