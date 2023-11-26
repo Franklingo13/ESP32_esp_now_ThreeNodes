@@ -15,8 +15,9 @@
 #define ESP_CHANNEL 1
 #define LED_PIN GPIO_NUM_2
 
-static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0x40, 0x22, 0xd8, 0xef, 0x21, 0xd4}; // Mac Andres
+static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0x40, 0x22, 0xd8, 0xef, 0x21, 0xd4}; // Mac Rx
 static const char *TAG = "esp_now_init";
+// Mac Franklin = 0xc8, 0xf0, 0x9e, 0x52, 0x9e, 0x64
 
 SSD1306_t dev;
 
@@ -41,15 +42,20 @@ void rec_cb(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int da
     char mac_str[18];
     sprintf(mac_str, MACSTR, MAC2STR(esp_now_info->src_addr));
     ESP_LOGI(TAG, "Message received from: %s, Message: %s", mac_str, data);
-
     // Actualizar la pantalla OLED con la dirección MAC y el mensaje recibido
     char display_text[64];
-    sprintf(display_text, "MAC: %s", mac_str);
+    //sprintf(display_text, "MAC: %s", mac_str);
+    // condicional para identificar al dueño de la MAC
+    // según la MAC, mostrar el nombre del dueño en la pantalla OLED
+    if (strcmp(mac_str, "c8:f0:9e:52:9e:64") == 0)
+    {
+        sprintf(display_text, "MAC de Franklin");
+    }
     ssd1306_clear_screen(&dev, false);
     ssd1306_contrast(&dev, 0xff);
     ssd1306_display_text(&dev, 0, display_text, 16, true);
-    ssd1306_display_text(&dev, 2, "Message:", 16, false);
-    ssd1306_display_text(&dev, 3, (char *)data, 16, false);
+    //ssd1306_display_text(&dev, 2, "Message:", 16, false);
+    ssd1306_display_text(&dev, 2, (char *)data, 16, false);
 }
 
 static esp_err_t init_esp_now(void)
@@ -87,7 +93,7 @@ void app_main(void)
     ESP_ERROR_CHECK(register_peer(peer_mac));
 
     oled_task(); // Inicializar la pantalla OLED
-
+    
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
