@@ -23,6 +23,7 @@
 static const char *TAG = "esp_now_init";
 static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0xec, 0x62, 0x60, 0x84, 0x1f, 0x40}; // MAC rx vila
 
+// Inicializa la conexión WiFi en modo estación
 static esp_err_t init_wifi(void)
 {
     wifi_init_config_t wifi_init_config = WIFI_INIT_CONFIG_DEFAULT();
@@ -39,11 +40,14 @@ static esp_err_t init_wifi(void)
     return ESP_OK;
 }
 
+// Callback para manejar el resultado del envío por ESP-NOW
 void send_cb(const uint8_t *mac_addr, esp_now_send_status_t status)
 {
     ESP_LOGI(TAG, "Message sent to MAC: " MACSTR ", Status: %s", MAC2STR(mac_addr), (status == ESP_NOW_SEND_SUCCESS) ? "Success" : "Fail");
 }
 
+
+// Inicializa la configuración de ESP-NOW y registra el callback de envío
 static esp_err_t init_esp_now(void)
 {
     esp_now_init();
@@ -53,6 +57,8 @@ static esp_err_t init_esp_now(void)
     return ESP_OK;
 }
 
+
+// Registra el nodo remoto (peer) con el cual se comunicará
 static esp_err_t register_peer(uint8_t *peer_mac)
 {
     esp_now_peer_info_t esp_now_peer_info = {};
@@ -63,12 +69,15 @@ static esp_err_t register_peer(uint8_t *peer_mac)
     return ESP_OK;
 }
 
+
+// Transmite la fecha y hora por ESP-NOW
 void transmit_time_date(struct tm *timeinfo) {
     char message[50];
     sprintf(message, "Fecha y Hora: %04d-%02d-%02d %02d:%02d:%02d", timeinfo->tm_year + 1900, timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
     esp_now_send(peer_mac, (uint8_t *)message, sizeof(message));
 }
-// Función para obtener la hora del DS3231
+
+// Función para obtener la hora del DS3231 y transmitirla por ESP-NOW
 void get_time_ds3231(void *pvParameters) {
     i2c_dev_t dev;
     memset(&dev, 0, sizeof(i2c_dev_t));
@@ -83,7 +92,9 @@ void get_time_ds3231(void *pvParameters) {
     };*/
     struct tm timeinfo;
     while (1) {
+        // Obtener la hora del DS3231
         if (ds3231_get_time(&dev, &timeinfo) == ESP_OK) {
+            // Transmitir la fecha y hora por ESP-NOW
             transmit_time_date(&timeinfo);
             ESP_LOGI(TAG, "Fecha y Hora: %04d-%02d-%02d %02d:%02d:%02d", timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday, timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
         }
@@ -97,6 +108,7 @@ void app_main() {
     ESP_ERROR_CHECK(register_peer(peer_mac));
     ESP_ERROR_CHECK(i2cdev_init());
 
+    // Crear tarea para obtener la hora del DS3231 y transmitirla
     xTaskCreate(get_time_ds3231, "get_time_ds3231", configMINIMAL_STACK_SIZE * 3, NULL, 5, NULL);
 
 }
