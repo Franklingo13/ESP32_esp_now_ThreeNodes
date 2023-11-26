@@ -8,6 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_netif.h"
+#include "esp_mac.h"
 #include "driver/gpio.h"
 #include "ssd1306.h"
 
@@ -88,9 +89,11 @@ void app_main(void)
     oled_task(); // Inicializar la pantalla OLED
 
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
+    ssd1306_clear_screen(&dev, false);
+	ssd1306_contrast(&dev, 0xff);
+	ssd1306_display_text(&dev, 0, "---WSN-G8---", 16, true);
+	ssd1306_software_scroll(&dev, 1, (dev._pages-1) );
+    
+    vTaskDelay(pdMS_TO_TICKS(1000));
 
-    while (true)
-    {
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    }
 }
