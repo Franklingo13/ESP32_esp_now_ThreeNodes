@@ -14,5 +14,5 @@
     "idf.pythonBinPathWin": "d:\\ESP32-IDF\\espressif\\python_env\\idf5.1_py3.11_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "d:\\ESP32-IDF\\espressif",
     "idf.flashType": "UART",
-    "idf.portWin": "COM5"
+    "idf.portWin": "COM4"
 }

@@ -49,13 +49,22 @@ void rec_cb(const esp_now_recv_info_t *esp_now_info, const uint8_t *data, int da
     // según la MAC, mostrar el nombre del dueño en la pantalla OLED
     if (strcmp(mac_str, "c8:f0:9e:52:9e:64") == 0)
     {
-        sprintf(display_text, "MAC de Franklin");
+        sprintf(display_text, "MAC de Franklin ");
+        //ssd1306_clear_screen(&dev, false);
+        ssd1306_contrast(&dev, 0xff);
+        ssd1306_display_text(&dev, 0, display_text, 16, true);
+        ssd1306_display_text(&dev, 2, (char *)data, 16, false);
+    }else {
+        sprintf(display_text, "MAC de Andres");
+        //ssd1306_clear_screen(&dev, false);
+        ssd1306_contrast(&dev, 0xff);
+        ssd1306_display_text(&dev, 4, display_text, 16, true);
+        // imprimir en dos lineas el mensaje recibido
+        ssd1306_display_text(&dev, 5, (char *)data, 12, false);
+        ssd1306_display_text(&dev, 6, (char *)data+13, 12, false);
+        ssd1306_display_text(&dev, 7, (char *)data+25, 10, false);
     }
-    ssd1306_clear_screen(&dev, false);
-    ssd1306_contrast(&dev, 0xff);
-    ssd1306_display_text(&dev, 0, display_text, 16, true);
-    //ssd1306_display_text(&dev, 2, "Message:", 16, false);
-    ssd1306_display_text(&dev, 2, (char *)data, 16, false);
+    
 }
 
 static esp_err_t init_esp_now(void)
