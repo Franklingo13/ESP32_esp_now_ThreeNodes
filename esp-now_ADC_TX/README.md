@@ -1,35 +1,30 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- |
+# Proyecto de Ejemplo
 
-# _Sample project_
+(Consulte el archivo README.md en el directorio 'examples' de nivel superior para obtener más información sobre ejemplos.)
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Este es el ejemplo más sencillo que se puede compilar. El ejemplo se utiliza con el comando `idf.py create-project`
+que copia el proyecto a la ruta especificada por el usuario y establece su nombre. Para obtener más información, consulte la [página de documentación](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+## Cómo usar el ejemplo
+Animamos a los usuarios a utilizar este ejemplo como plantilla para sus nuevos proyectos.
+Una forma recomendada es seguir las instrucciones en la [página de documentación](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
 
+## Contenido del directorio del ejemplo
 
+El proyecto **sample_project** contiene un archivo fuente en lenguaje C [main.c](main/main.c). El archivo se encuentra en la carpeta [main](main).
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+Los proyectos ESP-IDF se construyen utilizando CMake. La configuración de construcción del proyecto se encuentra en archivos `CMakeLists.txt`
+que proporcionan un conjunto de directivas e instrucciones que describen los archivos fuente y los objetivos del proyecto
+(ejecutable, biblioteca o ambos).
 
-## Example folder contents
+A continuación, se muestra una breve explicación de los archivos restantes en la carpeta del proyecto.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
-```
 ├── CMakeLists.txt
 ├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+│ ├── CMakeLists.txt
+│ └── main.c
+└── README.md Este es el archivo que está leyendo actualmente
+
+
+Además, el proyecto de ejemplo contiene archivos Makefile y component.mk, que se utilizan para el sistema de construcción heredado basado en Make.
+No son necesarios ni se utilizan al compilar con CMake e idf.py.
