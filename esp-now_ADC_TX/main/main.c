@@ -12,10 +12,9 @@
 #include "esp_event.h"
 #include "driver/gpio.h"
 #include "driver/i2c.h"
-//#include "ssd1306.h"
-//#include "font8x8_basic.h"
 #include <string.h>
 
+// Dirección I2C del dispositivo esclavo
 #define I2C_SLAVE_ADDR	0x68
 #define TIMEOUT_MS		1000
 #define DELAY_MS		1000
@@ -28,6 +27,7 @@ static const char *TAG = "esp_now_init";
 static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0xec, 0x62, 0x60, 0x84, 0x1f, 0x40}; // MAC rx vila
 
 
+// Inicialización del módulo Wi-Fi
 static esp_err_t init_wifi(void)
 {
     wifi_init_config_t wifi_init_config = WIFI_INIT_CONFIG_DEFAULT();
@@ -44,11 +44,14 @@ static esp_err_t init_wifi(void)
     return ESP_OK;
 }
 
+
+// Función de retorno de llamada para el envío de ESP-NOW
 void send_cb(const uint8_t *mac_addr, esp_now_send_status_t status)
 {
     ESP_LOGI(TAG, "Message sent to MAC: " MACSTR ", Status: %s", MAC2STR(mac_addr), (status == ESP_NOW_SEND_SUCCESS) ? "Success" : "Fail");
 }
 
+// Inicialización de ESP-NOW
 static esp_err_t init_esp_now(void)
 {
     esp_now_init();
@@ -59,6 +62,7 @@ static esp_err_t init_esp_now(void)
     return ESP_OK;
 }
 
+// Registro del dispositivo peer en la red ESP-NOW
 static esp_err_t register_peer(uint8_t *peer_mac)
 {
     esp_now_peer_info_t esp_now_peer_info = {};
@@ -77,8 +81,8 @@ void app_main()
     ESP_ERROR_CHECK(init_wifi());
     ESP_ERROR_CHECK(init_esp_now());
     ESP_ERROR_CHECK(register_peer(peer_mac));
+
     // Inicializar I2C
-    // Configuración de los pines I2C
     int i2c_master_port = I2C_NUM_0;
     i2c_config_t conf = {
         .mode = I2C_MODE_MASTER,
@@ -110,18 +114,14 @@ void app_main()
         }
         else
         {
-            //int adc_value = (adc_data[0] << 8) | adc_data[1]; // Combina los dos bytes en un valor entero
             int adc_value = adc_data[1]; 
             ESP_LOGI(TAG, "Valor ADC: %d", adc_value);
+            
             // Enviar datos por ESP-NOW
             char mesage[20];
             sprintf(mesage,"Nivel ADC:%02d", adc_value);
             esp_now_send(peer_mac, (uint8_t *) &mesage, sizeof(mesage));
-            //esp_now_send(peer_mac, (uint8_t *) &adc_value, sizeof(adc_value));
         }
-        //sprintf(message,"Nivel ADC:%02d", rx_data[1]);
-        // Enviar datos por ESP-NOW
-        //esp_now_send(peer_mac, (uint8_t *) &message, sizeof(message));
         vTaskDelay(pdMS_TO_TICKS(500)); 
 
     }
