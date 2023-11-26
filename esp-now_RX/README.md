@@ -1,35 +1,55 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- |
+# Proyecto de Ejemplo para ESP32
 
-# _Sample project_
+Este proyecto de ejemplo demuestra la integración de ESP-NOW para la comunicación entre dos nodos ESP32. En este caso, un nodo transmisor envía datos a un nodo receptor a través de ESP-NOW, y el nodo receptor muestra la información en una pantalla OLED.
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## Objetivo del Proyecto
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+El objetivo de este proyecto es proporcionar un punto de partida para desarrollar aplicaciones que utilizan la funcionalidad ESP-NOW de los microcontroladores ESP32. Además, se utiliza una pantalla OLED para visualizar los datos recibidos.
 
+## Configuración del Proyecto
 
+Este proyecto ha sido probado en los siguientes objetivos:
+- ESP32
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+## Estructura del Proyecto
 
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
+El contenido principal del proyecto se encuentra en el directorio `main`, con la siguiente estructura:
 
 ```
 ├── CMakeLists.txt
 ├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+│   ├── CMakeLists.txt
+│   └── main.c
+└── README.md                  // Este archivo
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+- `CMakeLists.txt`: Este archivo contiene la configuración del sistema de construcción CMake para el proyecto.
+
+- `main`: Este directorio contiene el código fuente principal del proyecto.
+
+    - `main.c`: Este archivo contiene el código fuente principal que implementa la lógica del proyecto.
+
+## Cómo Utilizar el Ejemplo
+
+Se recomienda a los usuarios utilizar este ejemplo como plantilla para nuevos proyectos. Se pueden seguir las instrucciones detalladas en la [página de documentación](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project) para iniciar un nuevo proyecto.
+
+## Funcionalidades Principales
+
+- Comunicación bidireccional entre dos nodos ESP32 utilizando ESP-NOW.
+- Visualización de datos recibidos en una pantalla OLED.
+- Uso de la infraestructura de construcción ESP-IDF basada en CMake.
+
+## Configuración del Nodo Receptor
+
+El nodo receptor está configurado para mostrar datos específicos en la pantalla OLED según la dirección MAC del nodo transmisor. En el código, se identifica al nodo transmitido por su dirección MAC y se muestra información específica en la pantalla OLED.
+
+## Configuración del Nodo Transmisor
+
+El nodo transmisor lee datos de un sensor (por ejemplo, un ADC) y los transmite al nodo receptor a través de ESP-NOW. El mensaje transmitido contiene la lectura del sensor.
+
+## Notas Adicionales
+
+- Este proyecto utiliza ESP-IDF y está configurado para construirse con CMake.
+- El código ha sido comentado para facilitar la comprensión y posible modificación.
+
+Este proyecto proporciona una base sólida para desarrollar aplicaciones que involucren la comunicación inalámbrica entre nodos ESP32 y la visualización de datos en una pantalla OLED. Se recomienda revisar la documentación de ESP-IDF para obtener más detalles sobre la configuración y el desarrollo de proyectos.
