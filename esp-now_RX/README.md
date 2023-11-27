@@ -43,6 +43,12 @@ Se recomienda a los usuarios utilizar este ejemplo como plantilla para nuevos pr
 
 El nodo receptor está configurado para mostrar datos específicos en la pantalla OLED según la dirección MAC del nodo transmisor. En el código, se identifica al nodo transmitido por su dirección MAC y se muestra información específica en la pantalla OLED.
 
+## Conexión del Nodo Receptor
+
+A continuación se muestra el diagrama de conexiones entre el ESP32 y la pantalla OLED.
+
+![Alt text](diagrama_conexion_nodoRX_OLED_esp32.jpg)
+
 ## Configuración del Nodo Transmisor
 
 El nodo transmisor lee datos de un sensor (por ejemplo, un ADC) y los transmite al nodo receptor a través de ESP-NOW. El mensaje transmitido contiene la lectura del sensor.
