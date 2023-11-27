@@ -23,6 +23,10 @@ Este proyecto demuestra cómo utilizar ESP-IDF para implementar la comunicación
 
 Asegúrate de ajustar la configuración de los pines I2C (SDA y SCL) y la dirección MAC del nodo remoto en el archivo `main.c` según tus requisitos.
 
+En la siguiente figura se muestra el diagrama de conexión entre el ESP32 y el RTC DS3231.
+
+![Diagrama de conexión entre ESP32 y DS3231](ESP32-with-DS3231-RTC-Module-schematic-diagram.jpg)
+
 ## Objetivo del Proyecto
 
 Este proyecto proporciona un punto de partida simple para implementar la comunicación entre nodos ESP32 utilizando ESP-NOW. Puedes utilizar este ejemplo como plantilla para tus propios proyectos.
