@@ -17,13 +17,14 @@ Los proyectos ESP-IDF se construyen utilizando CMake. La configuración de const
 que proporcionan un conjunto de directivas e instrucciones que describen los archivos fuente y los objetivos del proyecto
 (ejecutable, biblioteca o ambos).
 
-A continuación, se muestra una breve explicación de los archivos restantes en la carpeta del proyecto.
+A continuación, se muestra la estructura de los archivos restantes en la carpeta del proyecto.
 
-├── CMakeLists.txt
-├── main
-│ ├── CMakeLists.txt
-│ └── main.c
-└── README.md Este es el archivo que está leyendo actualmente
+├── CMakeLists.txt  
+├── main  
+│ ├── CMakeLists.txt  
+│ └── main.c  
+└── README.md  *Este es el archivo que está leyendo actualmente  
+
 
 
 Además, el proyecto de ejemplo contiene archivos Makefile y component.mk, que se utilizan para el sistema de construcción heredado basado en Make.
