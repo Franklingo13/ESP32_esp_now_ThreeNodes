@@ -25,7 +25,7 @@
 
 static const char *TAG = "esp_now_init";
 static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0xec, 0x62, 0x60, 0x84, 0x1f, 0x40}; // MAC rx vila
-
+//static uint8_t peer_mac[ESP_NOW_ETH_ALEN] = {0x40, 0x22, 0xd8, 0xef, 0x21,0xd4};
 
 // Inicialización del módulo Wi-Fi
 static esp_err_t init_wifi(void)
@@ -104,7 +104,7 @@ void app_main()
     {
         
         // Leer datos del ADC
-        uint8_t adc_data[5]; // Suponiendo que tu ADC devuelve 2 bytes de datos
+        uint8_t adc_data[5]; // Suponiendo que el ADC devuelve 5 bytes de datos
 
         esp_err_t ret = i2c_master_read_from_device(I2C_NUM_0, I2C_SLAVE_ADDR, adc_data, 5, TIMEOUT_MS / portTICK_PERIOD_MS);
         ESP_LOG_BUFFER_HEX(TAG, adc_data, 5); // Ver datos en el registro
@@ -118,11 +118,21 @@ void app_main()
             ESP_LOGI(TAG, "Valor ADC: %d", adc_value);
             
             // Enviar datos por ESP-NOW
-            char mesage[20];
-            sprintf(mesage,"Nivel ADC:%02d", adc_value);
-            esp_now_send(peer_mac, (uint8_t *) &mesage, sizeof(mesage));
+            //char mesage[20];
+            //sprintf(mesage,"Nivel ADC:%02d", adc_value);
+            char message[64];
+            
+            // Copiar el valor del ADC en el mensaje
+            // Se agrega la "key" temperature2 para identificar el dato en ThingsBoard 
+            sprintf(message, "{temperature2: %d}", adc_value);
+            // Terminar en null el mensaje
+            message[strlen(message)] = '\0';
+
+            esp_now_send(peer_mac, (uint8_t *) &message, sizeof(message));
         }
         vTaskDelay(pdMS_TO_TICKS(500)); 
+
+        
 
     }
     

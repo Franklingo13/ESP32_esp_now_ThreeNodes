@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "esp-now_ADC_TX",
-    "project_version":    "5c0daaf-dirty",
+    "project_version":    "0e4a7dc-dirty",
     "project_path":       "D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX",
     "idf_path":           "D:/ESP32-IDF/esp-idf",
     "build_dir":          "D:/Documentos/WSN/PracticasWSN/ESP32_esp_now_ThreeNodes/esp-now_ADC_TX/build",
